@@ -34,14 +34,14 @@
         <file id="30" name="face/face-30.png" width="97" height="90" pivot_x="0.542747" pivot_y="0.570502"/>
     </folder>
     <folder id="1" name="headbase">
-        <file id="0" name="headbase/headbase-0.png" width="196" height="291" pivot_x="0.520832" pivot_y="0.186585"/>
+        <file id="0" name="headbase/headbase-0.png" width="160" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
         <file id="1" name="headbase/headbase-1.png" width="260" height="285" pivot_x="0.545165" pivot_y="0.181918"/>
         <file id="2" name="headbase/headbase-2.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
         <file id="3" name="headbase/headbase-3.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
-        <file id="4" name="headbase/headbase-4.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
+        <file id="4" name="headbase/headbase-4.png" width="160" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
     </folder>
     <folder id="2" name="torso">
-        <file id="0" name="torso/torso-0.png" width="160" height="120" pivot_x="0.499996" pivot_y="0.231879"/>
+        <file id="0" name="torso/torso-0.png" width="180" height="140" pivot_x="0.499996" pivot_y="0.231879"/>
         <file id="1" name="torso/torso-1.png" width="160" height="120" pivot_x="0.515621" pivot_y="0.237712"/>
         <file id="2" name="torso/torso-2.png" width="160" height="120" pivot_x="0.478903" pivot_y="0.231879"/>
         <file id="3" name="torso/torso-3.png" width="160" height="120" pivot_x="0.499997" pivot_y="0.19042"/>
@@ -119,11 +119,11 @@
         <file id="1" name="cheeks/cheeks-1.png" width="64" height="60" pivot_x="0.461711" pivot_y="0.482092"/>
     </folder>
     <folder id="9" name="headbase_hat">
-        <file id="0" name="headbase_hat/headbase_hat-0.png" width="196" height="291" pivot_x="0.520832" pivot_y="0.186585"/>
+        <file id="0" name="headbase_hat/headbase_hat-0.png" width="160" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
         <file id="1" name="headbase_hat/headbase_hat-1.png" width="260" height="285" pivot_x="0.545165" pivot_y="0.181918"/>
         <file id="2" name="headbase_hat/headbase_hat-2.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
         <file id="3" name="headbase_hat/headbase_hat-3.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
-        <file id="4" name="headbase_hat/headbase_hat-4.png" width="300" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
+        <file id="4" name="headbase_hat/headbase_hat-4.png" width="160" height="300" pivot_x="0.520832" pivot_y="0.186585"/>
     </folder>
     <folder id="10" name="skirt">
         <file id="0" name="skirt/skirt-0.png" width="160" height="120" pivot_x="0.502184" pivot_y="0.561878"/>
@@ -199,7 +199,7 @@
             </timeline>
             <timeline id="1" name="headbase_hat_0_1">
                 <key id="0" spin="0">
-                    <object folder="9" file="0" x="-324.5625" y="120.099" angle="0"/>
+                    <object folder="9" file="0" x="-324" y="120" angle="0"/>
                 </key>
             </timeline>
             <timeline id="2" name="headbase_0_2">
@@ -234,17 +234,17 @@
             </timeline>
             <timeline id="8" name="hand_0_10">
                 <key id="0" spin="0">
-                    <object folder="4" file="0" x="-365.9615" y="53.299" angle="1.809907" scale_x="0.99427" scale_y="0.99427"/>
+                    <object folder="4" file="0" x="-378.9615" y="44.299" angle="1.809907" scale_x="0.99427" scale_y="0.99427"/>
                 </key>
             </timeline>
             <timeline id="9" name="arm_upper_0_11">
                 <key id="0" spin="0">
-                    <object folder="7" file="0" x="-346.5615" y="110.649" angle="338.945296" scale_x="0.997732" scale_y="0.997732"/>
+                    <object folder="7" file="0" x="-362.5615" y="102.649" angle="338.945296" scale_x="0.997732" scale_y="0.997732"/>
                 </key>
             </timeline>
             <timeline id="10" name="arm_lower_0_12">
                 <key id="0" spin="0">
-                    <object folder="6" file="0" x="-359.0615" y="81.749" angle="347.992187" scale_x="0.995054" scale_y="0.995054"/>
+                    <object folder="6" file="0" x="-378.0615" y="61.749" angle="347.992187" scale_x="0.995054" scale_y="0.995054"/>
                 </key>
             </timeline>
             <timeline id="11" name="hand_0_13">
