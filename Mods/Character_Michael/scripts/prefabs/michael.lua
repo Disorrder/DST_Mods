@@ -17,7 +17,7 @@ local assets = {
         Asset( "ANIM", "anim/player_actions_boomerang.zip" ),
         Asset( "ANIM", "anim/player_bush_hat.zip" ),
         Asset( "ANIM", "anim/player_attacks.zip" ),
-        Asset( "ANIM", "anim/player_idles.zip" ),
+        Asset( "ANIM", "anim/michael.zip" ),
         Asset( "ANIM", "anim/player_rebirth.zip" ),
         Asset( "ANIM", "anim/player_jump.zip" ),
         Asset( "ANIM", "anim/player_amulet_resurrect.zip" ),
@@ -29,7 +29,7 @@ local assets = {
         Asset( "SOUND", "sound/wilson.fsb" ),
         Asset( "ANIM", "anim/beard.zip" ),
 
-        Asset( "ANIM", "anim/michael.zip" ),
+        
         Asset( "ANIM", "anim/ghost_michael_build.zip" ),
 }
 local prefabs = {}
