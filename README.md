@@ -1,7 +1,7 @@
 # DST_Mods
 Mods for Don't starve together
 
-Disorder: scripts, animations
+Disorder: scripts
 Yuki: animations, art
 
 # Michael
