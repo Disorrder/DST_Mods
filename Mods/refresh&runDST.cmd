@@ -6,8 +6,8 @@ set modPath=%gamePath%\mods\Character_Michael
 echo(
 echo Copy files to %modPath%
 echo(
-::rmdir /S /Q "%modPath%"
-::mkdir "%modPath%"
+rmdir /S /Q "%modPath%"
+mkdir "%modPath%"
 xcopy /s /Y /D /Q Character_Michael "%modPath%"
 
 start steam://rungameid/322330
