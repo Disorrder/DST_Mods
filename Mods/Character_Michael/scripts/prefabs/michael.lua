@@ -1,4 +1,5 @@
 local MakePlayerCharacter = require "prefabs/player_common"
+local Utils = require "mod_modules/utils"
 
 local assets = {
     Asset( "ANIM", "anim/player_basic.zip" ),
@@ -46,15 +47,6 @@ local start_inv = {
 local common_postinit = function(inst) 
     -- Minimap icon
     inst.MiniMapEntity:SetIcon( "michael.tex" )
-end
-
----- HELPERS ----
-function giveItem(inst, name, val)
-    if not val then val = 1 end
-    for i=1, val, 1 do
-        local newBee = GLOBAL.SpawnPrefab(name)
-        inst.components.inventory:GiveItem(newBee)
-    end
 end
 
 ----  POSTINIT  ----
