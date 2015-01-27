@@ -1,5 +1,4 @@
 local MakePlayerCharacter = require "prefabs/player_common"
-local Utils = require "mod_modules/utils"
 
 local assets = {
     Asset( "ANIM", "anim/player_basic.zip" ),
@@ -40,12 +39,14 @@ local start_inv = {
     "armorwood",
     "spear",
     "pickaxe",
-    "shovel"
+    "shovel",
 }
 
 -- This initializes for both clients and the host
 local common_postinit = function(inst) 
     -- Minimap icon
+    if not inst then return print("common fail") end  
+
     inst.MiniMapEntity:SetIcon( "michael.tex" )
 end
 
@@ -55,7 +56,7 @@ local function onEat(inst, food)
         local ds = food.components.edible:GetSanity(inst) -- delta sanity
         print("michael is eating ", food.prefab, ". Food sanity is ", ds)
         if food.prefab == "honey" or food.prefab == "berries" then -- bear likes this
-            if ds == 0 then ds = 1 end
+            if ds == 0 then ds = 2 end
             print("Like food! Increase sanity by ", ds)
             inst.components.sanity:DoDelta(ds)
         elseif food.prefab:find("_cap") then -- and dislikes this
@@ -67,8 +68,10 @@ local function onEat(inst, food)
         end
     end
 end
+
 -- This initializes for the host only
 local master_postinit = function(inst)
+    if not inst then return print("master fail") end  
     inst.soundsname = "wolfgang"
     -- Stats    
     inst.components.health:SetMaxHealth(150)
@@ -76,6 +79,7 @@ local master_postinit = function(inst)
     inst.components.sanity:SetMax(200)
 
     inst:AddTag("michael")
+    Utils:giveItem(inst, "bee", 1) -- spawn bee in inv for test
 
     --inst.components.combat:SetKeepTargetFunction(keepTargetFn)
     inst.components.eater:SetOnEatFn(onEat)
