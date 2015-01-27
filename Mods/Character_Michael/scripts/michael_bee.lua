@@ -1,4 +1,4 @@
-local function beeChangeLoot(bee)
+local function changeLoot(bee)
     bee.components.combat.onkilledbyother = function(inst, attacker)
         -- print("Bee is killed")
         if attacker:HasTag("michael") then
@@ -13,4 +13,4 @@ local function beeChangeLoot(bee)
     end
 end
 
-AddPrefabPostInit("bee", beeChangeLoot)
+AddPrefabPostInit("bee", changeLoot)

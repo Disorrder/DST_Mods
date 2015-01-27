@@ -1,3 +1,6 @@
+modimport ("scripts/michael_bee.lua")
+modimport ("scripts/utils_michael.lua")
+
 PrefabFiles = {
     "michael",
 }
@@ -55,8 +58,3 @@ table.insert(GLOBAL.CHARACTER_GENDERS.MALE, "michael")
 
 AddMinimapAtlas("images/map_icons/michael.xml")
 AddModCharacter("michael")
-
-Utils = require "mod_modules/utils"
-
---- PREFABS ---
-require "mod_modules/bee"
