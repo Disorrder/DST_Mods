@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r2">
+    <folder id="0">
+        <file id="0" name="duplo_0.png" width="1000" height="1000" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="duplo_1.png" width="1000" height="1000" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="svet_1.png" width="111" height="112" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="honeyheart_0.png" width="121" height="122" pivot_x="0" pivot_y="1"/>
+        <file id="4" name="vetka_0.png" width="294" height="418" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="entity_000">
+        <animation id="0" name="NewAnimation" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="4" key="0" z_index="4"/>
+                </key>
+                <key id="1" time="299">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="1" z_index="2"/>
+                    <object_ref id="3" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="4" key="0" z_index="4"/>
+                </key>
+                <key id="2" time="500">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="3" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="4" key="0" z_index="4"/>
+                </key>
+                <key id="3" time="701">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="3" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="3" z_index="2"/>
+                    <object_ref id="3" timeline="3" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="4" key="0" z_index="4"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="duplo_0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-505" y="577.5"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="svet_1">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="-51.084877" y="121.402033" scale_x="0.882301" scale_y="0.90923"/>
+                </key>
+                <key id="1" time="299" spin="0">
+                    <object folder="0" file="2" x="-70.548997" y="132.232518" scale_x="1.213481" scale_y="1.108733"/>
+                </key>
+                <key id="2" time="500" spin="0">
+                    <object folder="0" file="2" x="-60.855712" y="118.533201" scale_x="1.056905" scale_y="1.034513"/>
+                </key>
+                <key id="3" time="701" spin="0">
+                    <object folder="0" file="2" x="-79.905603" y="135.911889" scale_x="1.478492" scale_y="1.169874"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="honeyheart_0">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="-56.281788" y="118.666717" scale_x="0.861307" scale_y="0.860774"/>
+                </key>
+                <key id="1" time="299" spin="0">
+                    <object folder="0" file="3" x="-69.982632" y="127.369386" scale_x="1.034735" scale_y="0.998934"/>
+                </key>
+                <key id="2" time="500" spin="0">
+                    <object folder="0" file="3" x="-61.163661" y="119.388013" scale_x="0.945902" scale_y="0.878041"/>
+                </key>
+                <key id="3" time="701" spin="0">
+                    <object folder="0" file="3" x="-74.798259" y="131.273587" scale_x="1.111221" scale_y="1.018955"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="vetka_0">
+                <key id="0">
+                    <object folder="0" file="4" x="-272.222222" y="591.666667"/>
+                </key>
+                <key id="1" time="500" spin="-1">
+                    <object folder="0" file="4" x="-324.145299" y="564.74359" angle="8.022404" scale_y="1"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="duplo_1">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="-506.578947" y="577.631579"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
