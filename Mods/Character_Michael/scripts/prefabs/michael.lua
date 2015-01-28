@@ -40,48 +40,42 @@ local start_inv = {
     "spear",
     "pickaxe",
     "shovel",
+    "bee"
 }
 
 -- This initializes for both clients and the host
 local common_postinit = function(inst) 
-    -- Minimap icon
-    if not inst then return print("common fail") end  
-
-    inst.MiniMapEntity:SetIcon( "michael.tex" )
+    inst.MiniMapEntity:SetIcon( "michael.tex" ) -- Minimap icon
 end
 
 ----  POSTINIT  ----
+local TUNE = TUNING.MICHAEL
+
 local function onEat(inst, food)
     if food and food.components.edible then
         local ds = food.components.edible:GetSanity(inst) -- delta sanity
-        print("michael is eating ", food.prefab, ". Food sanity is ", ds)
-        if food.prefab == "honey" or food.prefab == "berries" then -- bear likes this
-            if ds == 0 then ds = 2 end
-            print("Like food! Increase sanity by ", ds)
-            inst.components.sanity:DoDelta(ds)
+        if food.prefab == "honey" then -- bear likes this FRESH food
+            if ds == 0 then ds = TUNE.HONEY_SANITY end
+        elseif food.prefab == "berries" then 
+            if ds == 0 then ds = TUNE.BERRIES_SANITY end
         elseif food.prefab:find("_cap") then -- and dislikes this
-            print("Ate shroom!")
-            if ds > 0 then 
-                print("Dislike food! Decrease sanity by ", ds)
-                inst.components.sanity:DoDelta(-ds) 
-            end
+            if ds > 0 then ds = -ds end -- in fact, sanity doesn't rise or fall
         end
+        inst.components.sanity:DoDelta(ds)
     end
 end
 
 -- This initializes for the host only
 local master_postinit = function(inst)
-    if not inst then return print("master fail") end  
     inst.soundsname = "wolfgang"
     -- Stats    
-    inst.components.health:SetMaxHealth(150)
-    inst.components.hunger:SetMax(150)
-    inst.components.sanity:SetMax(200)
+    inst.components.health:SetMaxHealth(TUNE.HEALTH)
+    inst.components.hunger:SetMax(TUNE.HUNGER)
+    inst.components.sanity:SetMax(TUNE.SANITY)
 
     inst:AddTag("michael")
-    Utils:giveItem(inst, "bee", 1) -- spawn bee in inv for test
+    -- Utils:giveItem(inst, "bee", 1) -- spawn bee in inv for test
 
-    --inst.components.combat:SetKeepTargetFunction(keepTargetFn)
     inst.components.eater:SetOnEatFn(onEat)
 end
 

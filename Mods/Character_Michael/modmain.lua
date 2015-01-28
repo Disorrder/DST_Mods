@@ -58,4 +58,5 @@ AddModCharacter("michael")
 
 -- modules
 Utils = require "mod_modules/utils"
+modimport("scripts/mod_modules/tuning.lua")
 modimport("scripts/mod_modules/bee.lua")
