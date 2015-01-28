@@ -13,5 +13,6 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     BEE_STINGER_WEIGHT = 5,
     get_bee_after_killing = false, -- Класть пчелу в инвентарь после убийства, для тестов
 
-
+    -- System
+    debug = false,
 } end
