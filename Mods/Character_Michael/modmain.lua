@@ -1,3 +1,6 @@
+Utils = require "mod_modules/utils"
+modimport("scripts/mod_modules/tuning.lua")
+
 PrefabFiles = {
     "michael",
 }
@@ -57,6 +60,4 @@ AddMinimapAtlas("images/map_icons/michael.xml")
 AddModCharacter("michael")
 
 -- modules
-Utils = require "mod_modules/utils"
-modimport("scripts/mod_modules/tuning.lua")
 modimport("scripts/mod_modules/bee.lua")

@@ -51,6 +51,24 @@ end
 ----  POSTINIT  ----
 local TUNE = TUNING.MICHAEL
 
+-- Combat
+-- damagebonus
+local function onHit(inst, attacker, damage)
+    print("onhit", inst, attacker, damage)
+end
+
+local function keepTarget(inst, target)
+    print("keepTarget", inst, target)
+end
+
+local function attackOther(inst, data)
+    local target = data.target
+    local weapon = data.weapon
+    local projectile = data.projectile
+    print("attackOther", inst, target, weapon, projectile)
+end
+
+-- Eater
 local function onEat(inst, food)
     if food and food.components.edible then
         local ds = food.components.edible:GetSanity(inst) -- delta sanity
@@ -72,10 +90,24 @@ local master_postinit = function(inst)
     inst.components.health:SetMaxHealth(TUNE.HEALTH)
     inst.components.hunger:SetMax(TUNE.HUNGER)
     inst.components.sanity:SetMax(TUNE.SANITY)
+    
+    inst.components.combat:SetDefaultDamage(TUNE.UNARMED_DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNE.ATTACK_PERIOD)
+    inst.components.combat:SetRange(TUNE.ATTACK_RANGE)
+
+    -- inst:AddComponent("rage")
+    -- inst.components.rage:SetMax(TUNE.RAGE)
+    -- inst.components.rage:SetLoserate(TUNE.RAGE_LOSE)
 
     inst:AddTag("michael")
     -- Utils:giveItem(inst, "bee", 1) -- spawn bee in inv for test
 
+    -- Combat
+    inst.components.combat:SetOnHit(onHit)
+    inst.components.combat:SetKeepTargetFunction(keepTarget)
+    inst:ListenForEvent("onattackother", attackOther)
+
+    -- Eater
     inst.components.eater:SetOnEatFn(onEat)
 end
 
