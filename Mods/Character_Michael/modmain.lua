@@ -1,4 +1,4 @@
-Utils = require "mod_modules/utils"
+Utils = GLOBAL.require "mod_modules/utils"
 modimport("scripts/mod_modules/tuning.lua")
 
 PrefabFiles = {
