@@ -1,5 +1,3 @@
-function log(...) if TUNING.MICHAEL.debug then print(...) end end
-
 if not TUNING.MICHAEL then TUNING.MICHAEL = {
     -- Stats
     HEALTH = 150,
@@ -12,17 +10,21 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     UNARMED_DAMAGE = TUNING.UNARMED_DAMAGE, -- 10
 
     -- Rage
-    RAGE   = 100, -- TODO test
-    RAGE_LOSE = 1, -- per sec -- TODO test
+    RAGE = 100, -- max rage on start
+    RAGE_LIMIT = 100, -- max available rage
+    RAGE_LOSE = .2, -- per sec
     RAGE_LOSE_IN_COMBAT = 0, -- TODO
 
-    RAGE_ATK_SCALE = 0.5, -- TODO
+    RAGE_ATK_SCALE = 0.5,
     RAGE_ASPEED_SCALE = 0, -- TODO
     RAGE_SPEED_SCALE = 0, -- TODO
 
     -- Hitting
-    HIT_RAGE = 2, -- TODO
-    HIT_SANITY = -1, -- TODO
+    HIT_RAGE = 2,
+    HIT_SANITY = -2,
+
+    -- Bonus multiplicative damage from another monsters (1 = +100%)
+    DAMAGE_FROM_BEE = 0.5,
 
     -- Foods
     HONEY_SANITY = 2,
@@ -31,8 +33,8 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     -- Loot weights
     BEE_HONEY_WEIGHT = 15,
     BEE_STINGER_WEIGHT = 5,
-    get_bee_after_killing = false, -- Класть пчелу в инвентарь после убийства, для тестов
+    get_bee_after_killing = true, -- Класть пчелу в инвентарь после убийства, для тестов
 
     -- System
-    debug = true, -- TODO test
+    debug = true,
 } end

@@ -10,6 +10,7 @@ local function changeLoot(bee)
             bee.components.lootdropper:AddRandomLoot("stinger", TUNE.BEE_STINGER_WEIGHT)
             if TUNE.get_bee_after_killing then
                 Utils:giveItem(attacker, "bee", 1) -- spawn bee in inv for test. TODO if no bees in inv
+                log("give bee!")
             end
         end
     end

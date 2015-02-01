@@ -1,4 +1,7 @@
-Utils = GLOBAL.require "mod_modules/utils"
+local require = GLOBAL.require
+local STRINGS = GLOBAL.STRINGS
+Utils = require "mod_modules/utils"
+log   = Utils.log
 modimport("scripts/mod_modules/tuning.lua")
 
 PrefabFiles = {
@@ -29,9 +32,6 @@ Assets = {
 
 }
 
-local require = GLOBAL.require
-local STRINGS = GLOBAL.STRINGS
-
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.michael = "Michael, a spirit of bears"
 STRINGS.CHARACTER_NAMES.michael = "Michael"
@@ -61,3 +61,5 @@ AddModCharacter("michael")
 
 -- modules
 modimport("scripts/mod_modules/bee.lua")
+
+log("START mod Character_Michael")
