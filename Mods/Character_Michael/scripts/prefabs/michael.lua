@@ -64,13 +64,14 @@ end
 
 local function keepTarget(inst, target)
     log("keepTarget", inst, target)
+    inst.components.rage:SetLoserate(TUNE.RAGE_LOSE)
 end
 
 local function attackOther(inst, data)
     local target = data.target
     local weapon = data.weapon
     local projectile = data.projectile
-    inst.components.rage:Change(TUNE.HIT_RAGE)
+    inst.components.rage:DoDelta(TUNE.HIT_RAGE)
     inst.components.sanity:DoDelta(TUNE.HIT_SANITY)
     log("rage: "..inst.components.rage.current, "sanity: ", inst.components.sanity.current)
 end

@@ -16,7 +16,7 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     RAGE_LOSE_IN_COMBAT = 0, -- TODO
 
     RAGE_ATK_SCALE = 0.5,
-    RAGE_ASPEED_SCALE = 0, -- TODO
+    RAGE_ASPEED_SCALE = 0.1,
     RAGE_SPEED_SCALE = 0, -- TODO
 
     -- Hitting

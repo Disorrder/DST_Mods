@@ -5,7 +5,7 @@ local Rage = Class(function(self, inst)
     self.current = 0
     self.hold = false
     
-    self.loserate = 0
+    self.loserate = 1
     self.task = self.inst:DoPeriodicTask(1, function() self:LongUpdate(1) end)
 end,
 nil,
@@ -29,7 +29,7 @@ function Rage:OnLoad(data)
 end
 
 function Rage:LongUpdate(dt)
-    self:Change(-self.loserate * dt)
+    self:DoDelta(-self.loserate * dt)
 end
 
 function Rage:Pause()
@@ -58,11 +58,15 @@ function Rage:Hold(state)
 end
 
 function Rage:DoDelta(delta)
+    if self.hold then delta = 0 end
     self.current = math.min(math.max(self.current + delta, 0), self.max)   
+    local TUNE = TUNING.MICHAEL
     local combat = self.inst.components.combat
-    combat.damagebonus = TUNING.MICHAEL.RAGE_ATK_SCALE * self.current
+    combat.damagebonus = TUNE.RAGE_ATK_SCALE * self.current
+    local aspeedbonus = TUNE.RAGE_ASPEED_SCALE * self.current
+    combat:SetAttackPeriod(ATTACK_PERIOD - aspeedbonus)
     -- log("Rage:DoDelta", delta, self.current, combat.damagebonus)
-    self.inst.components.talker:Say("Rage: "..self.current..", DmgBonus: "..combat.damagebonus)
+    self.inst.components.talker:Say("Rage: "..self.current..", DmgBonus: "..combat.damagebonus..", ASBonus: "..aspeedbonus)
 end
 
 function Rage:GetPercent()
@@ -75,10 +79,10 @@ function Rage:SetPercent(p)
     local delta = self:DoDelta(current - old)
 end
 
-function Rage:Change(delta)
-    if not self.hold then
-        self:DoDelta(delta)
-    end
-end
+-- function Rage:Change(delta)
+--     if not self.hold then
+--         self:DoDelta(delta)
+--     end
+-- end
 
 return Rage
