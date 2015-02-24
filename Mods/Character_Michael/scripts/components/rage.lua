@@ -64,7 +64,7 @@ function Rage:DoDelta(delta)
     local combat = self.inst.components.combat
     combat.damagebonus = TUNE.RAGE_ATK_SCALE * self.current
     local aspeedbonus = TUNE.RAGE_ASPEED_SCALE * self.current
-    combat:SetAttackPeriod(ATTACK_PERIOD - aspeedbonus)
+    combat:SetAttackPeriod(TUNE.ATTACK_PERIOD - aspeedbonus)
     -- log("Rage:DoDelta", delta, self.current, combat.damagebonus)
     self.inst.components.talker:Say("Rage: "..self.current..", DmgBonus: "..combat.damagebonus..", ASBonus: "..aspeedbonus)
 end
