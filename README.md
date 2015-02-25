@@ -10,6 +10,14 @@ A spirit of bears.
 
 ##TODO List
 * Проверить ограничения по крафту рецептов
+* Проверить анимации
+** idle_inaction_
+** idle_inaction_down
+** idle_loop
+** run_pre
+** run_pst
+* Сделать кнопку для проверки анимаций
+* Сделать повышение рассудка при подборе ягод с куста
 
 ## Lore
 TODO
