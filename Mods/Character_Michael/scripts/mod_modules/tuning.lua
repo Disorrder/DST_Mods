@@ -37,4 +37,10 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
 
     -- System
     debug = true,
+
+    testAnim = {
+        "run_pre",
+        "run_loop",
+        "run_pst",
+    },
 } end

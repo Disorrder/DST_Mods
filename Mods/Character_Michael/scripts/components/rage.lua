@@ -66,7 +66,7 @@ function Rage:DoDelta(delta)
     local aspeedbonus = TUNE.RAGE_ASPEED_SCALE * self.current
     combat:SetAttackPeriod(TUNE.ATTACK_PERIOD - aspeedbonus)
     -- log("Rage:DoDelta", delta, self.current, combat.damagebonus)
-    self.inst.components.talker:Say("Rage: "..self.current..", DmgBonus: "..combat.damagebonus..", ASBonus: "..aspeedbonus)
+    -- self.inst.components.talker:Say("Rage: "..self.current..", DmgBonus: "..combat.damagebonus..", ASBonus: "..aspeedbonus)
 end
 
 function Rage:GetPercent()

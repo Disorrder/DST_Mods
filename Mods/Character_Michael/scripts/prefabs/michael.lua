@@ -16,7 +16,6 @@ local assets = {
     Asset( "ANIM", "anim/player_actions_boomerang.zip" ),
     Asset( "ANIM", "anim/player_bush_hat.zip" ),
     Asset( "ANIM", "anim/player_attacks.zip" ),
-    Asset( "ANIM", "anim/michael.zip" ),
     Asset( "ANIM", "anim/player_rebirth.zip" ),
     Asset( "ANIM", "anim/player_jump.zip" ),
     Asset( "ANIM", "anim/player_amulet_resurrect.zip" ),
@@ -27,6 +26,10 @@ local assets = {
     Asset( "SOUND", "sound/sfx.fsb" ),
     Asset( "SOUND", "sound/wilson.fsb" ),
     Asset( "ANIM", "anim/beard.zip" ),
+
+    Asset( "ANIM", "anim/michael.zip" ),
+    Asset( "ANIM", "anim/bear.zip" ),
+    Asset( "ANIM", "anim/werelizard_build.zip" ),
 
     Asset( "ANIM", "anim/ghost_michael_build.zip" ),
 }
@@ -91,6 +94,32 @@ local function onEat(inst, food)
     end
 end
 
+-- Werebear --
+local function becomeBear(inst)
+    inst.bear = true
+    inst.AnimState:SetBuild("werelizard_build")
+    inst:SetStateGraph("SGwerelizard")
+    inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
+    inst.sg:GoToState("transform_pst")
+    inst.Light:Enable(true)
+end
+
+local function becomeHuman(inst)
+    inst.bear = false
+    inst.AnimState:SetBuild("michael")
+    inst:SetStateGraph("SGwilson")
+    inst.Light:Enable(false)
+end    
+
+local function testAnim(inst)
+    local anims = TUNE.testAnim
+    inst.AnimState:PlayAnimation(anims[1])
+    for i = 2, #anims do
+        inst.AnimState:PushAnimation(anims[i])
+    end
+end
+
+
 -- This initializes for the host only
 local master_postinit = function(inst)
     inst.soundsname = "wolfgang"
@@ -119,6 +148,13 @@ local master_postinit = function(inst)
 
     -- Eater
     inst.components.eater:SetOnEatFn(onEat)
+
+    -- TEST ANIM
+    inst.bear = false
+    TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
+    TheInput:AddKeyDownHandler(Utils.keyboard.O, function() 
+        if inst.bear then becomeHuman(inst) else becomeBear(inst) end
+    end)
 end
 
 return MakePlayerCharacter("michael", prefabs, assets, common_postinit, master_postinit, start_inv)

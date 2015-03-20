@@ -3,6 +3,7 @@ local STRINGS = GLOBAL.STRINGS
 Utils = require "mod_modules/utils"
 log   = Utils.log
 modimport("scripts/mod_modules/tuning.lua")
+TheInput = GLOBAL.TheInput
 
 PrefabFiles = {
     "michael",

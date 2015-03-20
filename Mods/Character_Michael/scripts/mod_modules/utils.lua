@@ -14,6 +14,13 @@ function Utils.tableLength(T)
     return count
 end
 
+---- Keyboard ----
+local alpha = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}
+local KEY_A = 97
+local keyboard = {}
+for i = 1,#alpha do keyboard[alpha[i]] =  i + KEY_A - 1 end
+Utils.keyboard = keyboard
+
 ---- Logging ----
 local Log = {
     buffer = "",
