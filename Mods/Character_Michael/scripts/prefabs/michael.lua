@@ -76,7 +76,7 @@ local function attackOther(inst, data)
     local projectile = data.projectile
     inst.components.rage:DoDelta(TUNE.HIT_RAGE)
     inst.components.sanity:DoDelta(TUNE.HIT_SANITY)
-    log("rage: "..inst.components.rage.current, "sanity: ", inst.components.sanity.current)
+    log("rage: "..inst.components.rage.current, "sanity: "..inst.components.sanity.current)
 end
 
 -- Eater
