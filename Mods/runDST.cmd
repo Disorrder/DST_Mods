@@ -26,4 +26,13 @@ for /R "%modPath%" %%F in (*) do (
 )
 endlocal
 
+:: --- Force start ---
+set modsettingsFile=%gamePath%\mods\modsettings.lua
+set enableStr=ForceEnableMod('%modName%')
+FINDSTR %enableStr% "%modsettingsFile%" 2>&1
+if errorlevel 1 (
+    echo Enable force start!
+    ECHO %enableStr% >> "%modsettingsFile%"
+)
+
 START steam://rungameid/322330
