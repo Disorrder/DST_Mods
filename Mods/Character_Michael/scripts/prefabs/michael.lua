@@ -87,7 +87,7 @@ local function onEat(inst, food)
             if ds == 0 then ds = TUNE.HONEY_SANITY end
         elseif food.prefab == "berries" then 
             if ds == 0 then ds = TUNE.BERRIES_SANITY end
-        elseif food.prefab:find("_cap") then -- and dislikes this
+        elseif food.prefab:find("_cap") then -- and don't like so much this (shrooms)
             if ds > 0 then ds = -ds end -- in fact, sanity doesn't rise or fall
         end
         inst.components.sanity:DoDelta(ds)
@@ -96,19 +96,23 @@ end
 
 -- Werebear --
 local function becomeBear(inst)
-    inst.bear = true
+    inst:AddTag("bear")
     inst.AnimState:SetBuild("werelizard_build")
-    inst:SetStateGraph("SGwerelizard")
     inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
-    inst.sg:GoToState("transform_pst")
+    -- inst:SetStateGraph("SGwerebear")
+    -- inst.sg:GoToState("transform_pst")
+
     inst.Light:Enable(true)
+    TheWorld:PushEvent("overridecolourcube", "images/colour_cubes/beaver_vision_cc.tex")
 end
 
 local function becomeHuman(inst)
-    inst.bear = false
+    inst:RemoveTag("bear")
     inst.AnimState:SetBuild("michael")
     inst:SetStateGraph("SGwilson")
+
     inst.Light:Enable(false)
+    TheWorld:PushEvent("overridecolourcube")
 end    
 
 local function testAnim(inst)
@@ -138,22 +142,26 @@ local master_postinit = function(inst)
     inst.components.rage:SetLoserate(TUNE.RAGE_LOSE)
 
     inst:AddTag("michael")
-    -- Utils:giveItem(inst, "bee", 1) -- spawn bee in inv for test
+    becomeHuman(inst)
+
+    -- Light
+    inst.Light:SetRadius(5)
+    inst.Light:SetFalloff(.5)
+    inst.Light:SetIntensity(.6)
+    inst.Light:SetColour(245/255, 130/255, 110/255)
 
     -- Combat
     inst.components.combat:SetOnHit(onHit)
     inst.components.combat:SetKeepTargetFunction(keepTarget)
     inst:ListenForEvent("onattackother", attackOther)
-    -- inst.components.combat.onhitotherfn = attackOther -- don't know how better
 
     -- Eater
     inst.components.eater:SetOnEatFn(onEat)
 
     -- TEST ANIM
-    inst.bear = false
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
     TheInput:AddKeyDownHandler(Utils.keyboard.O, function() 
-        if inst.bear then becomeHuman(inst) else becomeBear(inst) end
+        if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
     end)
 end
 

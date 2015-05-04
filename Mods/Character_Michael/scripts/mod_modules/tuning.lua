@@ -17,13 +17,13 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
 
     RAGE_ATK_SCALE = 0.5,
     RAGE_ASPEED_SCALE = 0.1,
-    RAGE_SPEED_SCALE = 0, -- TODO
+    RAGE_SPEED_SCALE = 0, -- TODO inst.components.locomotor.runspeed
 
     -- Hitting
     HIT_RAGE = 2,
     HIT_SANITY = -2,
 
-    -- Bonus multiplicative damage from another monsters (1 = +100%)
+    -- Multiplicative bonus damage from another monsters (1 = +100%)
     DAMAGE_FROM_BEE = 0.5,
 
     -- Foods
@@ -33,7 +33,7 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     -- Loot weights
     BEE_HONEY_WEIGHT = 15,
     BEE_STINGER_WEIGHT = 5,
-    get_bee_after_killing = true, -- Класть пчелу в инвентарь после убийства, для тестов
+    get_bee_after_killing = false, -- Класть пчелу в инвентарь после убийства, для тестов
 
     -- System
     debug = true,
