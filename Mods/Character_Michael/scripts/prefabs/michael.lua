@@ -29,6 +29,7 @@ local assets = {
 
     Asset( "ANIM", "anim/michael.zip" ),
     Asset( "ANIM", "anim/bear.zip" ),
+    Asset( "ANIM", "anim/werebear_build.zip" ),
     Asset( "ANIM", "anim/werelizard_build.zip" ),
 
     Asset( "ANIM", "anim/ghost_michael_build.zip" ),
@@ -95,11 +96,22 @@ local function onEat(inst, food)
 end
 
 -- Werebear --
-local function becomeBear(inst)
-    inst:AddTag("bear")
+local function becomeLizard(inst)
+    inst:AddTag("lizard")
     inst.Transform:SetScale(1.6, 1.6, 1.6, 1.6)
     inst.AnimState:SetBuild("werelizard_build")
     inst.AnimState:SetBank("werelizard")
+    inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
+
+    inst.Light:Enable(true)
+    TheWorld:PushEvent("overridecolourcube", "images/colour_cubes/beaver_vision_cc.tex")
+end
+
+local function becomeBear(inst)
+    inst:AddTag("bear")
+    inst.Transform:SetScale(1.5, 1.5, 1.5, 1.5)
+    inst.AnimState:SetBuild("werebear_build")
+    inst.AnimState:SetBank("werebear")
     inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
     inst.AnimState:PlayAnimation("idle") -- if need
     -- inst:SetStateGraph("SGwerebear")
@@ -111,6 +123,7 @@ end
 
 local function becomeHuman(inst)
     inst:RemoveTag("bear")
+    inst:RemoveTag("lizard")
     inst.Transform:SetScale(1, 1, 1, 1)
     inst.AnimState:SetBuild("michael")
     inst.AnimState:SetBank("wilson")
@@ -167,6 +180,9 @@ local master_postinit = function(inst)
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
     TheInput:AddKeyDownHandler(Utils.keyboard.O, function() 
         if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
+    end)
+    TheInput:AddKeyDownHandler(Utils.keyboard.L, function() 
+        if inst:HasTag("lizard") then becomeHuman(inst) else becomeLizard(inst) end
     end)
 end
 

@@ -39,7 +39,7 @@
         <file id="10" name="beaver_arm/beaver_arm-12.png" width="184" height="233" pivot_x="0" pivot_y="1"/>
         <file id="11" name="beaver_arm/beaver_arm-20.png" width="184" height="228" pivot_x="0" pivot_y="1"/>
     </folder>
-    <entity id="0" name="bear">
+    <entity id="0" name="werebear">
         <animation id="0" name="idle_inaction_down" length="1000" interval="100">
             <mainline>
                 <key id="0">
