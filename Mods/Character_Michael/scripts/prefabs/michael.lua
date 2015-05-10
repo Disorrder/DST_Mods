@@ -33,6 +33,8 @@ local assets = {
     Asset( "ANIM", "anim/werelizard_build.zip" ),
 
     Asset( "ANIM", "anim/ghost_michael_build.zip" ),
+    
+    Asset("IMAGE", "images/colour_cubes/beaver_vision_cc.tex"),
 }
 local prefabs = {
     "bee",
@@ -97,7 +99,7 @@ end
 
 -- Werebear --
 local function becomeLizard(inst)
-    inst:AddTag("lizard")
+    inst:AddTag("bear")
     inst.Transform:SetScale(1.6, 1.6, 1.6, 1.6)
     log("-- becomeLizard start --")
     inst.AnimState:SetBuild("werelizard_build")
@@ -130,7 +132,6 @@ end
 
 local function becomeHuman(inst)
     inst:RemoveTag("bear")
-    inst:RemoveTag("lizard")
     inst.Transform:SetScale(1, 1, 1, 1)
     inst.AnimState:SetBuild("michael")
     inst.AnimState:SetBank("wilson")
@@ -186,12 +187,11 @@ local master_postinit = function(inst)
     -- TEST ANIM
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
     TheInput:AddKeyDownHandler(Utils.keyboard.O, function() 
-        log("O pressed")
         if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
     end)
     TheInput:AddKeyDownHandler(Utils.keyboard.L, function() 
         log("L pressed")
-        if inst:HasTag("lizard") then becomeHuman(inst) else becomeLizard(inst) end
+        if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
     end)
 end
 
