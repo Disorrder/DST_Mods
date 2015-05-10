@@ -99,12 +99,19 @@ end
 local function becomeLizard(inst)
     inst:AddTag("lizard")
     inst.Transform:SetScale(1.6, 1.6, 1.6, 1.6)
+    log("-- becomeLizard start --")
     inst.AnimState:SetBuild("werelizard_build")
+    log('build is set')
     inst.AnimState:SetBank("werelizard")
+    log('bank is set')
     inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
+    log('sound played')
 
     inst.Light:Enable(true)
+    log('Light enabled')
     TheWorld:PushEvent("overridecolourcube", "images/colour_cubes/beaver_vision_cc.tex")
+    log('colorcube is overrided')
+    log('-- becomeLizard end --')
 end
 
 local function becomeBear(inst)
@@ -179,9 +186,11 @@ local master_postinit = function(inst)
     -- TEST ANIM
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
     TheInput:AddKeyDownHandler(Utils.keyboard.O, function() 
+        log("O pressed")
         if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
     end)
     TheInput:AddKeyDownHandler(Utils.keyboard.L, function() 
+        log("L pressed")
         if inst:HasTag("lizard") then becomeHuman(inst) else becomeLizard(inst) end
     end)
 end
