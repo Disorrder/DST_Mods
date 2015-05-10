@@ -97,8 +97,11 @@ end
 -- Werebear --
 local function becomeBear(inst)
     inst:AddTag("bear")
+    inst.Transform:SetScale(1.6, 1.6, 1.6, 1.6)
     inst.AnimState:SetBuild("werelizard_build")
+    inst.AnimState:SetBank("werelizard")
     inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
+    inst.AnimState:PlayAnimation("idle") -- if need
     -- inst:SetStateGraph("SGwerebear")
     -- inst.sg:GoToState("transform_pst")
 
@@ -108,7 +111,9 @@ end
 
 local function becomeHuman(inst)
     inst:RemoveTag("bear")
+    inst.Transform:SetScale(1, 1, 1, 1)
     inst.AnimState:SetBuild("michael")
+    inst.AnimState:SetBank("wilson")
     inst:SetStateGraph("SGwilson")
 
     inst.Light:Enable(false)
