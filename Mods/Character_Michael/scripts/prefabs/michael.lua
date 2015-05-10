@@ -127,7 +127,7 @@ local function becomeBear(inst)
     -- inst.sg:GoToState("transform_pst")
 
     inst.Light:Enable(true)
-    TheWorld:PushEvent("overridecolourcube", "images/colour_cubes/beaver_vision_cc.tex")
+    -- TheWorld:PushEvent("overridecolourcube", "images/colour_cubes/beaver_vision_cc.tex")
 end
 
 local function becomeHuman(inst)
