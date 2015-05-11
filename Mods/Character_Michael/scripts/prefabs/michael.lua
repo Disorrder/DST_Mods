@@ -28,7 +28,6 @@ local assets = {
     Asset( "ANIM", "anim/beard.zip" ),
 
     Asset( "ANIM", "anim/michael.zip" ),
-    Asset( "ANIM", "anim/bear.zip" ),
     Asset( "ANIM", "anim/werebear_build.zip" ),
     Asset( "ANIM", "anim/werelizard_build.zip" ),
 
