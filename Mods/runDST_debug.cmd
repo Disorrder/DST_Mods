@@ -15,28 +15,31 @@ pause
 
 :: --- checking deleted files ---
 setlocal enabledelayedexpansion
+set /a files=0
+set /a deleted=0
 for /R "%modPath%" %%F in (*) do (
     set path=%%F
     set file=%modName%!path:%modPath%=!
     set ext=%%~xF
-    echo file: !file! [!ext!]
+    set /a files=files+1
+    :: echo file: !file! [!ext!]
     :: ext = extension
     :: NEQ = not equal
-    if exist !file! (
-        echo Exists: !file!
-    )
     if !ext! NEQ .zip (
         if not exist !file! (
             echo Remove: !file!
+            set /a deleted=deleted+1
             pause
             DEL "%%F"
         )
     )
 )
+echo Total: !files! files
+echo Deleted !deleted! files
 endlocal
-echo Deleted!
 pause
 
+:: --- copy files from project folder to game ---
 echo(
 echo Copy files to %modPath%
 echo(

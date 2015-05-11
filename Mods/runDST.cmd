@@ -6,10 +6,6 @@ for /f "tokens=2*" %%A in ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Va
 set gamePath=%steamPath%\SteamApps\common\Don't Starve Together Beta
 set modName=Character_Michael
 set modPath=%gamePath%\mods\%modName%
-echo(
-echo Copy files to %modPath%
-echo(
-XCOPY /s /Y /D /Q Character_Michael "%modPath%"
 
 :: --- checking deleted files ---
 setlocal enabledelayedexpansion
@@ -17,15 +13,24 @@ for /R "%modPath%" %%F in (*) do (
     set path=%%F
     set file=%modName%!path:%modPath%=!
     set ext=%%~xF
+    set /a deleted=0
     :: NEQ = not equal
     if !ext! NEQ .zip (
         if not exist !file! (
             echo Remove: !file!
+            set /a deleted=deleted+1
             DEL "%%F"
         )
     )
 )
+if !deleted! NEQ 0 echo Deleted !deleted! files
 endlocal
+
+:: --- copy files from project folder to game ---
+echo(
+echo Copy files to %modPath%
+echo(
+XCOPY /s /Y /D /Q Character_Michael "%modPath%"
 
 :: --- Force start ---
 set modsettingsFile=%gamePath%\mods\modsettings.lua
