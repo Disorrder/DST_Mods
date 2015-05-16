@@ -60,14 +60,14 @@ local TUNE = TUNING.MICHAEL
 local function onHit(inst, attacker, damage)
     log("onhit", inst, attacker, damage)
     local damagebonus
-	if attacker then
-		damagebonus = TUNE["DAMAGE_FROM_"..attacker.prefab:upper()]
-	end
+    if attacker then
+        damagebonus = TUNE["DAMAGE_FROM_"..attacker.prefab:upper()]
+    end
     if damagebonus then
         damagebonus = damage * damagebonus
         inst.components.health:DoDelta(-damagebonus)
         log("damagebonus on hit is", damagebonus)
-	else
+    else
         inst.components.health:DoDelta(-damage)
     end
 end
@@ -191,12 +191,12 @@ local master_postinit = function(inst)
     -- TEST ANIM
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
     TheInput:AddKeyDownHandler(Utils.keyboard.O, function()
-        if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
-    end)
+            if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
+        end)
     TheInput:AddKeyDownHandler(Utils.keyboard.L, function()
-        log("L pressed")
-        if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
-    end)
+            log("L pressed")
+            if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
+        end)
 end
 
 return MakePlayerCharacter("michael", prefabs, assets, common_postinit, master_postinit, start_inv)
