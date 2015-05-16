@@ -1,3 +1,4 @@
 *.autosave.scml
 
-Mods/Character_Michael/exported/*.zip
+Mods/Character_Michael/exported/*/*.zip
+Mods/Character_Michael/anim/*.zip

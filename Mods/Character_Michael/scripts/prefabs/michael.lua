@@ -32,7 +32,7 @@ local assets = {
     Asset( "ANIM", "anim/werelizard_build.zip" ),
 
     Asset( "ANIM", "anim/ghost_michael_build.zip" ),
-    
+
     Asset("IMAGE", "images/colour_cubes/beaver_vision_cc.tex"),
 }
 local prefabs = {
@@ -49,7 +49,7 @@ local start_inv = {
 }
 
 -- This initializes for both clients and the host
-local common_postinit = function(inst) 
+local common_postinit = function(inst)
     inst.MiniMapEntity:SetIcon( "michael.tex" ) -- Minimap icon
 end
 
@@ -59,11 +59,16 @@ local TUNE = TUNING.MICHAEL
 -- Combat
 local function onHit(inst, attacker, damage)
     log("onhit", inst, attacker, damage)
-    local damagebonus = TUNE["DAMAGE_FROM_"..attacker.prefab:upper()]
+    local damagebonus
+    if attacker then
+        damagebonus = TUNE["DAMAGE_FROM_"..attacker.prefab:upper()]
+    end
     if damagebonus then
         damagebonus = damage * damagebonus
         inst.components.health:DoDelta(-damagebonus)
         log("damagebonus on hit is", damagebonus)
+    else
+        inst.components.health:DoDelta(-damage)
     end
 end
 
@@ -87,7 +92,7 @@ local function onEat(inst, food)
         local ds = food.components.edible:GetSanity(inst) -- delta sanity
         if food.prefab == "honey" then -- bear likes this FRESH food
             if ds == 0 then ds = TUNE.HONEY_SANITY end
-        elseif food.prefab == "berries" then 
+        elseif food.prefab == "berries" then
             if ds == 0 then ds = TUNE.BERRIES_SANITY end
         elseif food.prefab:find("_cap") then -- and don't like so much this (shrooms)
             if ds > 0 then ds = -ds end -- in fact, sanity doesn't rise or fall
@@ -138,7 +143,7 @@ local function becomeHuman(inst)
 
     inst.Light:Enable(false)
     TheWorld:PushEvent("overridecolourcube")
-end    
+end
 
 local function testAnim(inst)
     local anims = TUNE.testAnim
@@ -152,11 +157,11 @@ end
 -- This initializes for the host only
 local master_postinit = function(inst)
     inst.soundsname = "wolfgang"
-    -- Stats    
+    -- Stats
     inst.components.health:SetMaxHealth(TUNE.HEALTH)
     inst.components.hunger:SetMax(TUNE.HUNGER)
     inst.components.sanity:SetMax(TUNE.SANITY)
-    
+
     inst.components.combat:SetDefaultDamage(TUNE.UNARMED_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNE.ATTACK_PERIOD)
     inst.components.combat:SetRange(TUNE.ATTACK_RANGE)
@@ -185,13 +190,13 @@ local master_postinit = function(inst)
 
     -- TEST ANIM
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
-    TheInput:AddKeyDownHandler(Utils.keyboard.O, function() 
-        if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
-    end)
-    TheInput:AddKeyDownHandler(Utils.keyboard.L, function() 
-        log("L pressed")
-        if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
-    end)
+    TheInput:AddKeyDownHandler(Utils.keyboard.O, function()
+            if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
+        end)
+    TheInput:AddKeyDownHandler(Utils.keyboard.L, function()
+            log("L pressed")
+            if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
+        end)
 end
 
 return MakePlayerCharacter("michael", prefabs, assets, common_postinit, master_postinit, start_inv)
