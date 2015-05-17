@@ -1,6 +1,9 @@
 local TUNE = TUNING.MICHAEL
 
 local function changeLoot(bee)
+    if not TheWorld.ismastersim then
+        return
+    end
     bee.components.combat.onkilledbyother = function(inst, attacker)
         if attacker:HasTag("michael") then
             for k,v in pairs(bee.components.lootdropper.randomloot) do
