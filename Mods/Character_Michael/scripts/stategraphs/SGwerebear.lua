@@ -11,7 +11,7 @@ local actionhandlers =
     ActionHandler(ACTIONS.MINE, "work"),
     ActionHandler(ACTIONS.DIG, "work"),
     ActionHandler(ACTIONS.HAMMER, "work"),
-    ActionHandler(ACTIONS.EAT, "eat"),
+    -- ActionHandler(ACTIONS.EAT, "eat"),
 	ActionHandler(ACTIONS.ATTACK, "attack"),
 	
 }
@@ -39,7 +39,7 @@ local events=
     CommonHandlers.OnAttack(),
     CommonHandlers.OnAttacked(),
     CommonHandlers.OnDeath(),
-    EventHandler("transform_person", function(inst) inst.sg:GoToState("towoodie") end)
+    EventHandler("bear_end", function(inst) inst.sg:GoToState("tohuman") end)
 }
 
 local states=
@@ -226,14 +226,14 @@ local states=
     },
 
     State{
-        name = "towoodie",
+        name = "tohuman",
         tags = {"busy"},
         onenter = function(inst)
             inst.Physics:Stop()            
             inst.AnimState:PlayAnimation("death")
             inst.sg:SetTimeout(3)
             inst.SoundEmitter:PlaySound("dontstarve/characters/woodie/death_beaver")
-            inst.components.beaverness.doing_transform = true
+            inst.components.rage.doing_transform = true
         end,
 
         timeline =
@@ -251,20 +251,20 @@ local states=
             inst:DoTaskInTime(2, function() 
                 
                 if TheWorld.ismastersim then
-                --TheWorld:PushEvent("ms_nextcycle")
-                print("Spawning in smoke and light!")
-				SpawnPrefab("maxwell_smoke").Transform:SetPosition(inst.Transform:GetWorldPosition())
+                    --TheWorld:PushEvent("ms_nextcycle")
+                    print("Spawning in smoke and light!")
+    				SpawnPrefab("maxwell_smoke").Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-                if not TheWorld.state.isday then
-				SpawnPrefab("spawnlight_multiplayer").Transform:SetPosition(inst.Transform:GetWorldPosition())
-                end
+                    if not TheWorld.state.isday then
+    				    SpawnPrefab("spawnlight_multiplayer").Transform:SetPosition(inst.Transform:GetWorldPosition())
+                    end
 
-                inst.components.beaverness.makeperson(inst)
-                inst.components.sanity:SetPercent(.25)
-                inst.components.health:SetPercent(.33)
-                inst.components.hunger:SetPercent(.25)
-                inst.components.beaverness.doing_transform = false
-                inst.sg:GoToState("wakeup")
+                    -- inst.components.rage.makeperson(inst)
+                    inst.components.sanity:SetPercent(.25)
+                    inst.components.health:SetPercent(.33)
+                    inst.components.hunger:SetPercent(.25)
+                    inst.components.rage.doing_transform = false
+                    inst.sg:GoToState("wakeup")
                 end
 
                 inst:ScreenFade(true, 1)
@@ -329,48 +329,48 @@ local states=
         },   
     },
 
-    State{
-        name = "eat",
-        tags = {"busy"},
+    -- State{
+    --     name = "eat",
+    --     tags = {"busy"},
         
-        onenter = function(inst, feed)
-            inst.Physics:Stop() 
+    --     onenter = function(inst, feed)
+    --         inst.Physics:Stop() 
 
-            if feed ~= nil then
-                inst.components.locomotor:Clear()
-                inst:ClearBufferedAction()
-                inst.sg.statemem.feed = feed
-                inst.sg:AddStateTag("pausepredict")
-                if inst.components.playercontroller ~= nil then
-                    inst.components.playercontroller:RemotePausePrediction()
-                end
-            elseif inst:GetBufferedAction() then
-                feed = inst:GetBufferedAction().invobject
-            end
+    --         if feed ~= nil then
+    --             inst.components.locomotor:Clear()
+    --             inst:ClearBufferedAction()
+    --             inst.sg.statemem.feed = feed
+    --             inst.sg:AddStateTag("pausepredict")
+    --             if inst.components.playercontroller ~= nil then
+    --                 inst.components.playercontroller:RemotePausePrediction()
+    --             end
+    --         elseif inst:GetBufferedAction() then
+    --             feed = inst:GetBufferedAction().invobject
+    --         end
 
-            inst.AnimState:PlayAnimation("eat")
-            inst.SoundEmitter:PlaySound("dontstarve/characters/woodie/eat_beaver") 
-        end,
+    --         inst.AnimState:PlayAnimation("eat")
+    --         inst.SoundEmitter:PlaySound("dontstarve/characters/woodie/eat_beaver") 
+    --     end,
         
-        timeline=
-        {
-            TimeEvent(9*FRAMES, function(inst) 
+    --     timeline=
+    --     {
+    --         TimeEvent(9*FRAMES, function(inst) 
 
-                 if inst.sg.statemem.feed ~= nil then
-                    inst.components.eater:Eat(inst.sg.statemem.feed)
-                else
-                    inst:PerformBufferedAction() 
-                end
+    --              if inst.sg.statemem.feed ~= nil then
+    --                 inst.components.eater:Eat(inst.sg.statemem.feed)
+    --             else
+    --                 inst:PerformBufferedAction() 
+    --             end
 
-                  end),
-            TimeEvent(12*FRAMES, function(inst) inst.sg:RemoveStateTag("busy") inst.sg:AddStateTag("idle") end),
-        },        
+    --               end),
+    --         TimeEvent(12*FRAMES, function(inst) inst.sg:RemoveStateTag("busy") inst.sg:AddStateTag("idle") end),
+    --     },        
         
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
-        },        
-    },
+    --     events=
+    --     {
+    --         EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+    --     },        
+    -- },
 }
 
 CommonStates.AddIdle(states)

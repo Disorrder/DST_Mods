@@ -12,7 +12,7 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     -- Rage
     RAGE = 100, -- max rage on start
     RAGE_LIMIT = 100, -- max available rage
-    RAGE_LOSE = .2, -- per sec
+    RAGE_LOSE = .2 *100, -- per sec
     RAGE_LOSE_IN_COMBAT = 0, -- TODO
 
     RAGE_ATK_SCALE = 0.5,
@@ -20,7 +20,7 @@ if not TUNING.MICHAEL then TUNING.MICHAEL = {
     RAGE_SPEED_SCALE = 0, -- TODO inst.components.locomotor.runspeed
 
     -- Hitting
-    HIT_RAGE = 2,
+    HIT_RAGE = 2 *50,
     HIT_SANITY = -2,
 
     -- Multiplicative bonus damage from another monsters (1 = +100%)

@@ -4,6 +4,10 @@ local Rage = Class(function(self, inst)
     self.maxlimit = 100
     self.current = 0
     self.hold = false
+
+    self.onBecomeHuman = nil
+    self.onBecomeBear  = nil
+    self.doing_transform = false
     
     self.loserate = 1
     self.task = self.inst:DoPeriodicTask(1, function() self:LongUpdate(1) end)
@@ -65,6 +69,21 @@ function Rage:DoDelta(delta)
     combat.damagebonus = TUNE.RAGE_ATK_SCALE * self.current
     local aspeedbonus = TUNE.RAGE_ASPEED_SCALE * self.current
     combat:SetAttackPeriod(TUNE.ATTACK_PERIOD - aspeedbonus)
+
+    if self.inst:HasTag("bear") and self.current <= 0 then
+        if self.onBecomeHuman then
+            self.onBecomeHuman(self.inst)
+            -- self.inst.net_posttransbeaver:push()
+        end
+        self.inst:PushEvent("bear_end")
+
+    elseif not self.inst:HasTag("bear") and self.current >= self.max and not self.inst:HasTag("playerghost") then
+        if self.onBecomeBear then
+            self.onbecomebeaver(self.inst)
+            -- self.inst.net_posttransperson:push()
+        end
+        self.inst:PushEvent("bear_start")
+    end
     -- log("Rage:DoDelta", delta, self.current, combat.damagebonus)
     -- self.inst.components.talker:Say("Rage: "..self.current..", DmgBonus: "..combat.damagebonus..", ASBonus: "..aspeedbonus)
 end

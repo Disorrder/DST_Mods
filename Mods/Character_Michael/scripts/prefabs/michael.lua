@@ -127,7 +127,7 @@ local function becomeBear(inst)
     inst.AnimState:SetBank("werebear")
     inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon")
     inst.AnimState:PlayAnimation("idle") -- if need
-    -- inst:SetStateGraph("SGwerebear")
+    inst:SetStateGraph("SGwerebear")
     -- inst.sg:GoToState("transform_pst")
 
     inst.Light:Enable(true)
@@ -188,15 +188,19 @@ local master_postinit = function(inst)
     -- Eater
     inst.components.eater:SetOnEatFn(onEat)
 
+    -- Rage
+    inst:ListenForEvent("bear_start", becomeBear)
+    -- inst:ListenForEvent("bear_end", becomeHuman)
+
     -- TEST ANIM
     TheInput:AddKeyDownHandler(Utils.keyboard.P, function() testAnim(inst) end)
     TheInput:AddKeyDownHandler(Utils.keyboard.O, function()
-            if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
-        end)
+        if inst:HasTag("bear") then becomeHuman(inst) else becomeBear(inst) end
+    end)
     TheInput:AddKeyDownHandler(Utils.keyboard.L, function()
-            log("L pressed")
-            if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
-        end)
+        log("L pressed")
+        if inst:HasTag("bear") then becomeHuman(inst) else becomeLizard(inst) end
+    end)
 end
 
 return MakePlayerCharacter("michael", prefabs, assets, common_postinit, master_postinit, start_inv)
